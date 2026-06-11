@@ -1,0 +1,763 @@
+﻿<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>㈱末広ボデー | 旭川市の板金・塗装・車修理・車検</title>
+  <meta name="description" content="旭川市末広の板金塗装・車修理・車検専門店。小さなキズから事故修理、車検・点検まで丁寧に対応します。TEL: 0166-57-2114" />
+  <meta name="keywords" content="旭川,板金塗装,車修理,末広ボデー,車検,事故修理,末広" />
+  <meta property="og:title" content="㈱末広ボデー | 旭川市の板金・塗装・車検" />
+  <meta property="og:description" content="旭川市末広の車修理・板金塗装・車検専門店。どんな相談にも丁寧に対応します。" />
+  <meta property="og:type" content="website" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&family=Bebas+Neue&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg:      #0c0c0c;
+      --surface: #141414;
+      --sf2:     #1c1c1c;
+      --border:  #272727;
+      --gold:    #c8a96e;
+      --gold-lt: #dfc08a;
+      --white:   #eeebe6;
+      --gray:    #888;
+      --gray-lt: #555;
+      --red:     #c0392b;
+      --nav-h:   68px;
+      --max:     1120px;
+      --fn-disp: 'Bebas Neue', sans-serif;
+      --fn-ja:   'Noto Sans JP', sans-serif;
+      --fn-en:   'Inter', sans-serif;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { font-family: var(--fn-ja); background: var(--bg); color: var(--white); line-height: 1.7; -webkit-font-smoothing: antialiased; }
+
+    /* ── NAV ── */
+    nav { position: fixed; top: 0; left: 0; right: 0; z-index: 300; height: var(--nav-h); display: flex; align-items: center; padding: 0 32px; transition: background .3s; }
+    nav.scrolled { background: rgba(12,12,12,.94); backdrop-filter: blur(16px); border-bottom: 1px solid var(--border); }
+    .nav-inner { width: 100%; max-width: var(--max); margin: 0 auto; display: flex; align-items: center; justify-content: space-between; }
+    .nav-logo { display: flex; flex-direction: column; line-height: 1; text-decoration: none; }
+    .nav-logo-en { font-family: var(--fn-disp); font-size: 22px; letter-spacing: .1em; color: var(--gold); }
+    .nav-logo-ja { font-size: 10px; color: var(--gray); letter-spacing: .06em; margin-top: 2px; }
+    .nav-links { display: flex; list-style: none; gap: 2px; }
+    .nav-links a { font-size: 12px; font-weight: 500; letter-spacing: .08em; color: var(--gray); text-decoration: none; padding: 8px 14px; border-radius: 3px; transition: color .15s, background .15s; }
+    .nav-links a:hover { color: var(--white); background: rgba(255,255,255,.06); }
+    .nav-tel { font-family: var(--fn-disp); font-size: 18px; letter-spacing: .06em; color: var(--white); text-decoration: none; display: flex; align-items: center; gap: 8px; }
+    .nav-tel::before { content: '📞'; font-size: 14px; font-family: sans-serif; }
+    .hamburger { display: none; flex-direction: column; gap: 6px; background: none; border: none; cursor: pointer; padding: 8px; }
+    .hamburger span { display: block; width: 22px; height: 1.5px; background: var(--white); }
+    .mobile-menu { display: none; position: fixed; inset: var(--nav-h) 0 0 0; background: var(--bg); z-index: 299; flex-direction: column; padding: 32px; gap: 4px; }
+    .mobile-menu.open { display: flex; }
+    .mobile-menu a { font-size: 20px; font-weight: 700; color: var(--white); text-decoration: none; padding: 16px 0; border-bottom: 1px solid var(--border); }
+    .mobile-menu a:hover { color: var(--gold); }
+
+    /* ── HERO / SLIDESHOW ── */
+    .hero { min-height: 100vh; display: flex; flex-direction: column; justify-content: flex-end; padding: 0 32px 80px; position: relative; overflow: hidden; }
+    .slideshow { position: absolute; inset: 0; z-index: 0; }
+    .slide { position: absolute; inset: 0; background-size: cover; background-position: center; opacity: 0; transition: opacity 1.2s ease; }
+    .slide.active { opacity: 1; }
+    .slide-overlay { position: absolute; inset: 0; background: linear-gradient(to bottom, rgba(12,12,12,.35) 0%, rgba(12,12,12,.65) 50%, rgba(12,12,12,1) 100%); }
+    .slide-dots { position: absolute; bottom: 28px; left: 50%; transform: translateX(-50%); display: flex; gap: 10px; z-index: 2; }
+    .dot { width: 8px; height: 8px; border-radius: 50%; background: rgba(255,255,255,.35); cursor: pointer; border: none; transition: background .3s, transform .3s; }
+    .dot.active { background: var(--gold); transform: scale(1.3); }
+    .hero-content { position: relative; z-index: 1; max-width: var(--max); margin: 0 auto; width: 100%; }
+    .hero-eyebrow { font-family: var(--fn-en); font-size: 11px; font-weight: 600; letter-spacing: .2em; text-transform: uppercase; color: var(--gold); margin-bottom: 20px; display: flex; align-items: center; gap: 14px; }
+    .hero-eyebrow::before { content: ''; width: 40px; height: 1px; background: var(--gold); }
+    .hero h1 { font-family: var(--fn-ja); font-size: clamp(36px, 6.5vw, 82px); font-weight: 900; line-height: 1.08; letter-spacing: -.02em; max-width: 780px; }
+    .hero h1 em { color: var(--gold); font-style: normal; }
+    .hero-sub { font-size: clamp(13px, 1.4vw, 16px); color: rgba(238,235,230,.58); margin: 24px 0 44px; max-width: 520px; line-height: 1.85; }
+    .hero-actions { display: flex; gap: 16px; flex-wrap: wrap; }
+    .btn-gold { display: inline-flex; align-items: center; gap: 10px; background: var(--gold); color: #0c0c0c; font-family: var(--fn-ja); font-size: 15px; font-weight: 700; padding: 15px 34px; border-radius: 3px; text-decoration: none; border: none; cursor: pointer; transition: background .15s, transform .12s; }
+    .btn-gold:hover { background: var(--gold-lt); transform: translateY(-2px); }
+    .btn-outline { display: inline-flex; align-items: center; gap: 10px; background: transparent; color: var(--white); font-family: var(--fn-ja); font-size: 15px; font-weight: 500; padding: 14px 34px; border-radius: 3px; text-decoration: none; border: 1px solid rgba(238,235,230,.28); cursor: pointer; transition: border-color .15s, transform .12s; }
+    .btn-outline:hover { border-color: var(--gold); color: var(--gold); transform: translateY(-2px); }
+    .hero-scroll { position: absolute; bottom: 28px; right: 32px; z-index: 1; display: flex; flex-direction: column; align-items: center; gap: 8px; font-family: var(--fn-en); font-size: 10px; letter-spacing: .15em; text-transform: uppercase; color: var(--gray); }
+    .scroll-line { width: 1px; height: 44px; background: linear-gradient(to bottom, var(--gold), transparent); animation: spulse 2s ease-in-out infinite; }
+    @keyframes spulse { 0%,100%{opacity:.4} 50%{opacity:1} }
+
+    /* ── STATS ── */
+    .stats-band { background: var(--surface); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); padding: 40px 32px; }
+    .stats-inner { max-width: var(--max); margin: 0 auto; display: grid; grid-template-columns: repeat(4,1fr); }
+    .stat-item { text-align: center; padding: 0 20px; border-right: 1px solid var(--border); }
+    .stat-item:last-child { border-right: none; }
+    .stat-num { font-family: var(--fn-disp); font-size: 48px; line-height: 1; letter-spacing: .04em; color: var(--gold); }
+    .stat-unit { font-size: 18px; }
+    .stat-label { font-size: 11px; color: var(--gray); margin-top: 6px; line-height: 1.5; }
+
+    /* ── NEWS ── */
+    .news-section { padding: 72px 32px; background: var(--bg); }
+    .news-inner { max-width: var(--max); margin: 0 auto; }
+    .sec-eye { font-family: var(--fn-en); font-size: 11px; font-weight: 600; letter-spacing: .2em; text-transform: uppercase; color: var(--gold); margin-bottom: 16px; display: flex; align-items: center; gap: 12px; }
+    .sec-eye::before { content: ''; width: 28px; height: 1px; background: var(--gold); }
+    .sec-title { font-size: clamp(24px, 3vw, 36px); font-weight: 900; letter-spacing: -.01em; margin-bottom: 36px; }
+    .sec-title em { color: var(--gold); font-style: normal; }
+    .news-list { display: flex; flex-direction: column; border-top: 1px solid var(--border); }
+    .news-item { border-bottom: 1px solid var(--border); cursor: pointer; transition: background .15s; }
+    .news-item:hover { background: rgba(200,169,110,.04); }
+    .news-item.open { background: rgba(200,169,110,.05); }
+    .news-row { display: grid; grid-template-columns: 120px 80px 1fr 28px; gap: 16px; align-items: center; padding: 20px 16px; }
+    .news-date { font-family: var(--fn-en); font-size: 13px; color: var(--gray); }
+    .news-tag { display: inline-flex; align-items: center; justify-content: center; font-size: 10px; font-weight: 700; letter-spacing: .06em; padding: 3px 10px; border-radius: 2px; }
+    .tag-info { background: rgba(200,169,110,.15); color: var(--gold); }
+    .tag-work { background: rgba(30,144,100,.15); color: #1e9064; }
+    .tag-notice { background: rgba(192,57,43,.15); color: #e74c3c; }
+    .news-text { font-size: 14px; color: var(--white); line-height: 1.5; }
+    .news-arrow { font-size: 20px; color: var(--gold); transition: transform .25s; text-align: center; line-height: 1; }
+    .news-item.open .news-arrow { transform: rotate(90deg); }
+    .news-detail { display: none; padding: 0 16px 24px 236px; }
+    .news-item.open .news-detail { display: block; }
+    .news-detail p { font-size: 14px; color: rgba(238,235,230,.72); line-height: 1.85; margin-bottom: 10px; }
+    .news-detail strong { color: var(--white); font-weight: 600; }
+
+    /* ── ABOUT ── */
+    .about-section { padding: 96px 32px; background: var(--surface); }
+    .about-inner { max-width: var(--max); margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 72px; align-items: center; }
+    .about-desc { font-size: 15px; color: rgba(238,235,230,.65); line-height: 1.9; margin-top: 20px; }
+    .about-cards { display: flex; flex-direction: column; gap: 2px; }
+    .about-card { background: var(--bg); border: 1px solid var(--border); padding: 24px 28px; position: relative; overflow: hidden; transition: border-color .2s; }
+    .about-card:hover { border-color: var(--gold); }
+    .about-card::before { content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 3px; background: var(--gold); transform: scaleY(0); transform-origin: top; transition: transform .2s; }
+    .about-card:hover::before { transform: scaleY(1); }
+    .about-card-label { font-family: var(--fn-en); font-size: 10px; font-weight: 600; letter-spacing: .15em; text-transform: uppercase; color: var(--gold); margin-bottom: 8px; }
+    .about-card h3 { font-size: 17px; font-weight: 900; line-height: 1.4; }
+    .about-card p { font-size: 13px; color: var(--gray); margin-top: 6px; line-height: 1.65; }
+
+    /* ── SERVICES ── */
+    .svc-section { padding: 96px 32px; background: var(--bg); }
+    .svc-inner { max-width: var(--max); margin: 0 auto; }
+    .svc-grid { margin-top: 52px; display: grid; grid-template-columns: repeat(3,1fr); gap: 2px; }
+    .svc-card { background: var(--surface); border: 1px solid var(--border); padding: 36px 28px; position: relative; overflow: hidden; transition: border-color .2s, transform .2s; }
+    .svc-card:hover { border-color: var(--gold); transform: translateY(-4px); }
+    .svc-num { font-family: var(--fn-disp); font-size: 44px; color: var(--border); position: absolute; top: 16px; right: 20px; line-height: 1; }
+    .svc-icon { font-size: 34px; margin-bottom: 16px; }
+    .svc-card h3 { font-size: 18px; font-weight: 900; margin-bottom: 10px; }
+    .svc-card p { font-size: 13px; color: var(--gray); line-height: 1.75; }
+
+    /* ── REVIEWS ── */
+    .reviews-section { padding: 96px 32px; background: var(--surface); }
+    .reviews-inner { max-width: var(--max); margin: 0 auto; }
+    .reviews-head { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 48px; flex-wrap: wrap; gap: 20px; }
+    .gmap-badge { display: flex; align-items: center; gap: 16px; background: var(--bg); border: 1px solid var(--border); padding: 16px 24px; border-radius: 4px; }
+    .gmap-badge-score { font-family: var(--fn-disp); font-size: 48px; color: var(--gold); line-height: 1; }
+    .gmap-stars { color: #fbbc04; font-size: 18px; letter-spacing: 2px; }
+    .gmap-count { font-size: 12px; color: var(--gray); }
+    .gmap-source { font-size: 11px; color: var(--gray-lt); display: flex; align-items: center; gap: 4px; }
+    .reviews-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 16px; }
+    .review-card { background: var(--bg); border: 1px solid var(--border); padding: 28px; border-radius: 2px; display: flex; flex-direction: column; gap: 16px; }
+    .review-top { display: flex; align-items: center; gap: 12px; }
+    .review-avatar { width: 42px; height: 42px; border-radius: 50%; background: var(--sf2); border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; font-size: 18px; flex-shrink: 0; }
+    .review-name { font-size: 14px; font-weight: 700; }
+    .review-date { font-size: 11px; color: var(--gray); margin-top: 2px; }
+    .review-stars { color: #fbbc04; font-size: 14px; letter-spacing: 1px; }
+    .review-text { font-size: 13px; color: rgba(238,235,230,.75); line-height: 1.8; flex: 1; }
+    .review-src { font-size: 11px; color: var(--gray-lt); display: flex; align-items: center; gap: 6px; margin-top: 4px; }
+
+    /* ── MAP ── */
+    .map-section { padding: 96px 32px; background: var(--bg); }
+    .map-inner { max-width: var(--max); margin: 0 auto; }
+    .map-grid { margin-top: 52px; display: grid; grid-template-columns: 1fr 360px; gap: 32px; align-items: start; }
+    .map-embed { border-radius: 4px; overflow: hidden; border: 1px solid var(--border); height: 420px; }
+    .map-embed iframe { width: 100%; height: 100%; border: none; }
+    .map-info { display: flex; flex-direction: column; gap: 2px; }
+    .info-row { background: var(--surface); border: 1px solid var(--border); padding: 20px 22px; display: flex; gap: 14px; align-items: flex-start; transition: border-color .15s; }
+    .info-row:hover { border-color: var(--gold); }
+    .info-icon { font-size: 20px; flex-shrink: 0; margin-top: 2px; }
+    .info-label { font-family: var(--fn-en); font-size: 10px; font-weight: 600; letter-spacing: .12em; text-transform: uppercase; color: var(--gold); margin-bottom: 4px; }
+    .info-val { font-size: 14px; color: var(--white); line-height: 1.6; }
+    .info-val a { color: var(--gold); text-decoration: none; }
+
+    /* ── CTA ── */
+    .cta-band { background: var(--gold); padding: 72px 32px; }
+    .cta-inner { max-width: var(--max); margin: 0 auto; display: flex; align-items: center; justify-content: space-between; gap: 32px; flex-wrap: wrap; }
+    .cta-band h2 { font-size: clamp(20px, 3vw, 34px); font-weight: 900; color: #0c0c0c; line-height: 1.3; }
+    .cta-band p { font-size: 14px; color: rgba(12,12,12,.6); margin-top: 6px; }
+    .btn-dark { display: inline-flex; align-items: center; gap: 10px; background: #0c0c0c; color: var(--white); font-family: var(--fn-ja); font-size: 15px; font-weight: 700; padding: 16px 36px; border-radius: 3px; text-decoration: none; border: none; cursor: pointer; white-space: nowrap; transition: background .15s, transform .12s; }
+    .btn-dark:hover { background: #1c1c1c; transform: translateY(-2px); }
+
+    /* ── CONTACT ── */
+    .contact-section { padding: 96px 32px; background: var(--surface); }
+    .contact-inner { max-width: var(--max); margin: 0 auto; }
+    .contact-grid { margin-top: 52px; display: grid; grid-template-columns: 1fr 1fr; gap: 56px; align-items: start; }
+    .form-group { display: flex; flex-direction: column; gap: 8px; margin-bottom: 16px; }
+    .form-group label { font-size: 11px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--gray); }
+    .form-group input, .form-group select, .form-group textarea { background: var(--bg); border: 1px solid var(--border); color: var(--white); font-family: var(--fn-ja); font-size: 15px; padding: 12px 16px; border-radius: 2px; width: 100%; transition: border-color .15s; appearance: none; }
+    .form-group input:focus, .form-group select:focus, .form-group textarea:focus { outline: none; border-color: var(--gold); }
+    .form-group textarea { resize: vertical; min-height: 110px; }
+    .form-group select option { background: var(--surface); }
+    .contact-aside { display: flex; flex-direction: column; gap: 20px; }
+    .tel-block { background: var(--bg); border: 1px solid var(--border); padding: 28px; }
+    .tel-block-label { font-family: var(--fn-en); font-size: 10px; font-weight: 600; letter-spacing: .15em; text-transform: uppercase; color: var(--gold); margin-bottom: 10px; }
+    .tel-number { font-family: var(--fn-disp); font-size: 38px; letter-spacing: .06em; color: var(--white); }
+    .tel-hours { font-size: 12px; color: var(--gray); margin-top: 6px; }
+    .note-block { background: var(--bg); border: 1px solid var(--border); padding: 20px; font-size: 13px; color: var(--gray); line-height: 1.75; }
+    .note-block strong { color: var(--white); }
+
+    /* ── FOOTER ── */
+    footer { background: #080808; border-top: 1px solid var(--border); padding: 56px 32px 36px; }
+    .footer-inner { max-width: var(--max); margin: 0 auto; }
+    .footer-top { display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 48px; padding-bottom: 40px; border-bottom: 1px solid var(--border); }
+    .footer-logo-en { font-family: var(--fn-disp); font-size: 26px; letter-spacing: .1em; color: var(--gold); }
+    .footer-logo-ja { font-size: 11px; color: var(--gray); margin-top: 4px; letter-spacing: .06em; }
+    .footer-tagline { font-size: 13px; color: var(--gray); margin-top: 14px; max-width: 260px; line-height: 1.75; }
+    .footer-col h4 { font-family: var(--fn-en); font-size: 10px; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; color: var(--gold); margin-bottom: 18px; }
+    .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 12px; }
+    .footer-col ul a { font-size: 13px; color: var(--gray); text-decoration: none; transition: color .15s; }
+    .footer-col ul a:hover { color: var(--white); }
+    .footer-bottom { padding-top: 28px; font-size: 11px; color: var(--gray-lt); display: flex; justify-content: space-between; flex-wrap: wrap; gap: 8px; }
+
+    /* ── REVEAL ── */
+    .reveal { opacity: 0; transform: translateY(28px); transition: opacity .6s ease, transform .6s ease; }
+    .reveal.visible { opacity: 1; transform: none; }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 900px) {
+      .about-inner { grid-template-columns: 1fr; gap: 48px; }
+      .svc-grid { grid-template-columns: 1fr 1fr; }
+      .reviews-grid { grid-template-columns: 1fr; }
+      .map-grid { grid-template-columns: 1fr; }
+      .contact-grid { grid-template-columns: 1fr; }
+      .footer-top { grid-template-columns: 1fr 1fr; }
+      .stats-inner { grid-template-columns: repeat(2,1fr); row-gap: 28px; }
+      .stat-item:nth-child(2) { border-right: none; }
+      .stat-item:nth-child(3) { border-right: 1px solid var(--border); }
+    }
+    @media (max-width: 640px) {
+      nav, .hero, .stats-band, section, .news-section, .about-section, .svc-section, .reviews-section, .map-section, .cta-band, .contact-section { padding-left: 20px; padding-right: 20px; }
+      footer { padding-left: 20px; padding-right: 20px; }
+      .nav-links, .nav-tel { display: none; }
+      .hamburger { display: flex; }
+      .svc-grid { grid-template-columns: 1fr; }
+      .news-row { grid-template-columns: 1fr 28px; gap: 8px; }
+      .news-date { display: none; }
+      .news-detail { padding: 0 16px 20px 16px; }
+      .footer-top { grid-template-columns: 1fr; }
+      .hero-scroll { display: none; }
+      .reviews-head { flex-direction: column; align-items: flex-start; }
+      .cta-inner { flex-direction: column; }
+    }
+    @media (prefers-reduced-motion: reduce) { *, *::before, *::after { transition: none !important; } .scroll-line { animation: none; } }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="main-nav">
+  <div class="nav-inner">
+    <a class="nav-logo" href="#">
+      <span class="nav-logo-en">SUEHIRO BODY</span>
+      <span class="nav-logo-ja">㈱末広ボデー</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="bankin-toso.html">板金塗装</a></li>
+      <li><a href="shaken.html">末広ボデーの車検</a></li>
+      <li><a href="tire-car-goods.html">タイヤ・カー用品</a></li>
+      <li><a href="sales-rental.html">販売・レンタカー</a></li>
+      <li><a href="insurance-roadservice.html">保険・ロードサービス</a></li>
+      <li><a href="contact.html">お問い合わせ</a></li>
+    </ul>
+    <a href="tel:0166572114" class="nav-tel">0166-57-2114</a>
+    <button class="hamburger" onclick="toggleMenu()" aria-label="メニュー">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<div class="mobile-menu" id="mobileMenu">
+  <a href="bankin-toso.html" onclick="closeMobile()">板金塗装</a>
+  <a href="shaken.html" onclick="closeMobile()">末広ボデーの車検</a>
+  <a href="tire-car-goods.html" onclick="closeMobile()">タイヤ・カー用品</a>
+  <a href="sales-rental.html" onclick="closeMobile()">販売・レンタカー</a>
+  <a href="insurance-roadservice.html" onclick="closeMobile()">保険・ロードサービス</a>
+  <a href="contact.html" onclick="closeMobile()">お問い合わせ</a>
+</div>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="slideshow">
+    <div class="slide active" style="background-image:url('https://images.unsplash.com/photo-1503376780353-7e6692767b70?w=1600&q=80&fit=crop')"></div>
+    <div class="slide" style="background-image:url('https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=1600&q=80&fit=crop')"></div>
+    <div class="slide" style="background-image:url('https://images.unsplash.com/photo-1486262715619-67b85e0b08d3?w=1600&q=80&fit=crop')"></div>
+    <div class="slide" style="background-image:url('https://images.unsplash.com/photo-1617469767053-d3b523a0b982?w=1600&q=80&fit=crop')"></div>
+    <div class="slide-overlay"></div>
+    <div class="slide-dots">
+      <span class="dot active" onclick="goSlide(0)"></span>
+      <span class="dot" onclick="goSlide(1)"></span>
+      <span class="dot" onclick="goSlide(2)"></span>
+      <span class="dot" onclick="goSlide(3)"></span>
+    </div>
+  </div>
+  <div class="hero-content">
+    <p class="hero-eyebrow">Asahikawa Suehiro &nbsp;|&nbsp; 旭川市末広</p>
+    <h1>
+      どんな相談も、<br><em>丁寧に</em>応える。
+    </h1>
+    <p class="hero-sub">
+      板金塗装・メンテナンス・カー用品など、<br>
+      末広ボデーグループでおクルマをトータルサポート。<br>
+      お困りごとはお気軽にご相談ください。
+    </p>
+    <div class="hero-actions">
+      <a href="contact.html" class="btn-gold">無料お見積りを依頼する →</a>
+      <a href="bankin-toso.html" class="btn-outline">板金塗装を見る</a>
+    </div>
+  </div>
+  <div class="hero-scroll">
+    <div class="scroll-line"></div>
+    <span>scroll</span>
+  </div>
+</section>
+
+<!-- STATS -->
+<div class="stats-band">
+  <div class="stats-inner">
+    <div class="stat-item">
+      <div class="stat-num">相談<span class="stat-unit">歓迎</span></div>
+      <div class="stat-label">小さなキズから<br>事故修理まで</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num">地域<span class="stat-unit">密着</span></div>
+      <div class="stat-label">旭川市末広の<br>車修理工場</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num">車検<span class="stat-unit">可</span></div>
+      <div class="stat-label">修理から点検まで<br>まとめて相談</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num">見積<span class="stat-unit">無料</span></div>
+      <div class="stat-label">費用と期間を<br>わかりやすく案内</div>
+    </div>
+  </div>
+</div>
+
+<!-- NEWS -->
+<div class="news-section" id="news">
+  <div class="news-inner">
+    <p class="sec-eye reveal">News</p>
+    <h2 class="sec-title reveal">お<em>知らせ</em></h2>
+    <div class="news-list reveal">
+      <div class="news-item" onclick="toggleNews(this)">
+        <div class="news-row">
+          <span class="news-date">Season</span>
+          <span class="news-tag tag-notice">相談</span>
+          <span class="news-text">夏前の点検・エアコンまわりのご相談を受け付けています。</span>
+          <span class="news-arrow">›</span>
+        </div>
+        <div class="news-detail">
+          <p>暑くなる時期は、エアコンの効きやバッテリー、タイヤまわりの不安が増えやすくなります。気になる症状がある場合は、お電話（0166-57-2114）またはフォームよりお気軽にご相談ください。</p>
+        </div>
+      </div>
+      <div class="news-item" onclick="toggleNews(this)">
+        <div class="news-row">
+          <span class="news-date">Check</span>
+          <span class="news-tag tag-info">お知らせ</span>
+          <span class="news-text">車検・点検のご予約は余裕をもってご相談ください。</span>
+          <span class="news-arrow">›</span>
+        </div>
+        <div class="news-detail">
+          <p>車検満了日が近い場合や、リース車の点検時期が近い場合は、早めのご相談がおすすめです。必要な整備内容や日数をわかりやすくご案内します。</p>
+        </div>
+      </div>
+      <div class="news-item" onclick="toggleNews(this)">
+        <div class="news-row">
+          <span class="news-date">Winter</span>
+          <span class="news-tag tag-work">施工事例</span>
+          <span class="news-text">融雪剤によるサビ修理・下回り点検のご相談</span>
+          <span class="news-arrow">›</span>
+        </div>
+        <div class="news-detail">
+          <p>旭川の冬道では融雪剤による下回りのサビが進みやすくなります。車検前の点検や、気になるサビの修理もご相談ください。</p>
+        </div>
+      </div>
+      <div class="news-item" onclick="toggleNews(this)">
+        <div class="news-row">
+          <span class="news-date">Repair</span>
+          <span class="news-tag tag-info">お知らせ</span>
+          <span class="news-text">キズ・へこみ・保険修理のご相談に対応しています。</span>
+          <span class="news-arrow">›</span>
+        </div>
+        <div class="news-detail">
+          <p>小さなキズやへこみから、事故後の修理、保険を使うかどうかのご相談まで対応します。まずは車の状態をお聞かせください。</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ABOUT -->
+<section class="about-section" id="about">
+  <div class="about-inner">
+    <div class="reveal">
+      <p class="sec-eye">About Us</p>
+      <h2 class="sec-title">おクルマのことを、<br><em>まとめて相談</em>できる場所。</h2>
+      <p class="about-desc">末広ボデーグループは、板金塗装・車検・メンテナンス・タイヤ・カー用品など、旭川のカーライフを幅広くサポートします。</p>
+      <p class="about-desc" style="margin-top:14px;">修理だけでなく、日々の点検や用品選び、急なトラブル時の相談まで。お客様一人ひとりの使い方に合わせたご提案を大切にしています。</p>
+    </div>
+    <div class="about-cards reveal">
+      <div class="about-card">
+        <p class="about-card-label">Strength 01</p>
+        <h3>クルマのことを<br>幅広くサポート。</h3>
+        <p>修理・点検・用品・保険まで、困りごとの入口として相談できます。</p>
+      </div>
+      <div class="about-card">
+        <p class="about-card-label">Strength 02</p>
+        <h3>状態に合わせて<br>わかりやすく提案。</h3>
+        <p>必要な整備や交換時期を、お客様の使い方に合わせてご案内します。</p>
+      </div>
+      <div class="about-card">
+        <p class="about-card-label">Strength 03</p>
+        <h3>グループ連携で<br>スムーズに対応。</h3>
+        <p>板金塗装、用品、メンテナンスなどを一体で相談しやすい体制です。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section class="svc-section" id="service">
+  <div class="svc-inner">
+    <p class="sec-eye reveal">Services</p>
+    <h2 class="sec-title reveal">私たちの<em>サービス</em></h2>
+    <p style="font-size:14px;color:var(--gray);max-width:540px;line-height:1.85;" class="reveal">板金塗装から車検、タイヤ・ホイール、カー用品、保険修理まで、おクルマをトータルでサポートします。</p>
+    <div class="svc-grid">
+      <div class="svc-card reveal">
+        <div class="svc-num">01</div>
+        <div class="svc-icon">🔧</div>
+        <h3>板金修理</h3>
+        <p>事故・衝突・飛び石による凹みや変形を丁寧に修復。フレームから精密に対応します。</p>
+      </div>
+      <div class="svc-card reveal">
+        <div class="svc-num">02</div>
+        <div class="svc-icon">🎨</div>
+        <h3>塗装・全塗装</h3>
+        <p>部分塗装から全塗装まで対応。元の色に忠実に合わせた仕上がりをお届けします。</p>
+      </div>
+      <div class="svc-card reveal">
+        <div class="svc-num">03</div>
+        <div class="svc-icon">🚗</div>
+        <h3>車検・点検</h3>
+        <p>法定点検から車検まで対応。リース車の車検通知サービスも実施しています。</p>
+      </div>
+      <div class="svc-card reveal">
+        <div class="svc-num">04</div>
+        <div class="svc-icon">🛡️</div>
+        <h3>事故修理・保険対応</h3>
+        <p>保険会社との交渉・書類手続きもサポート。初めての事故でも安心してご相談ください。</p>
+      </div>
+      <div class="svc-card reveal">
+        <div class="svc-num">05</div>
+        <div class="svc-icon">❄️</div>
+        <h3>タイヤ交換・下回り点検</h3>
+        <p>冬タイヤ・夏タイヤへの交換、融雪剤による下回りサビの点検・修理を承ります。</p>
+      </div>
+      <div class="svc-card reveal">
+        <div class="svc-num">06</div>
+        <div class="svc-icon">🔍</div>
+        <h3>無料お見積り</h3>
+        <p>まずはお気軽にご相談ください。費用・期間を丁寧にご説明します。見積り無料です。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- REVIEWS -->
+<section class="reviews-section" id="reviews">
+  <div class="reviews-inner">
+    <div class="reviews-head">
+      <div>
+        <p class="sec-eye reveal">Customer Reviews</p>
+        <h2 class="sec-title reveal">お客様の<em>声</em></h2>
+      </div>
+      <div class="gmap-badge reveal">
+        <div class="gmap-badge-score">Voice</div>
+        <div>
+          <div class="gmap-stars">★★★★★</div>
+          <div class="gmap-count">相談しやすさを大切にしています</div>
+          <div class="gmap-source">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg>
+            掲載文は提案用の仮テキストです
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="reviews-grid">
+      <div class="review-card reveal">
+        <div class="review-top">
+          <div class="review-avatar">🚗</div>
+          <div>
+            <div class="review-name">お客様の声</div>
+            <div class="review-date">掲載イメージ</div>
+          </div>
+        </div>
+        <div class="review-stars">★★★★★</div>
+        <p class="review-text">「修理費用や作業内容をわかりやすく説明してもらえたので、安心して相談できました。急ぎの相談にも丁寧に対応してもらえて助かりました。」</p>
+        <div class="review-src">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg>
+          提案用テキスト
+        </div>
+      </div>
+      <div class="review-card reveal">
+        <div class="review-top">
+          <div class="review-avatar">☕</div>
+          <div>
+            <div class="review-name">お客様の声</div>
+            <div class="review-date">掲載イメージ</div>
+          </div>
+        </div>
+        <div class="review-stars">★★★★★</div>
+        <p class="review-text">「車のことに詳しくなくても質問しやすく、必要な整備と急がなくてよい整備をきちんと分けて案内してくれました。」</p>
+        <div class="review-src">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg>
+          提案用テキスト
+        </div>
+      </div>
+      <div class="review-card reveal">
+        <div class="review-top">
+          <div class="review-avatar">⭐</div>
+          <div>
+            <div class="review-name">お客様の声</div>
+            <div class="review-date">掲載イメージ</div>
+          </div>
+        </div>
+        <div class="review-stars">★★★★★</div>
+        <p class="review-text">「車検や点検の時期も相談できるので、忘れがちなメンテナンスも安心です。地域で長く付き合える工場として頼りにしています。」</p>
+        <div class="review-src">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg>
+          提案用テキスト
+        </div>
+      </div>
+    </div>
+    <div style="margin-top:28px;text-align:center;" class="reveal">
+      <a href="https://maps.google.com/?cid=ChIJHW1ahhLkDF8RtgBrr6oSL8s" target="_blank" rel="noopener" class="btn-outline" style="display:inline-flex;">Googleマップで店舗情報を見る →</a>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<div class="cta-band">
+  <div class="cta-inner">
+    <div>
+      <h2>まずは、お気軽にご相談ください。</h2>
+      <p>お電話・メールフォームにてお見積り無料。当日対応も可能です（要相談）。</p>
+    </div>
+        <a href="contact.html" class="btn-dark">お問い合わせする →</a>
+  </div>
+</div>
+
+<!-- MAP -->
+<section class="map-section" id="access">
+  <div class="map-inner">
+    <p class="sec-eye reveal">Access</p>
+    <h2 class="sec-title reveal"><em>アクセス</em>・店舗情報</h2>
+    <div class="map-grid">
+      <div class="map-embed reveal">
+        <iframe
+          src="https://www.google.com/maps?q=%E3%80%92071-8131%20%E5%8C%97%E6%B5%B7%E9%81%93%E6%97%AD%E5%B7%9D%E5%B8%82%E6%9C%AB%E5%BA%831%E6%9D%A19%E4%B8%81%E7%9B%AE1-29&output=embed"
+          allowfullscreen loading="lazy" referrerpolicy="no-referrer-when-downgrade"
+          title="末広ボデー 地図">
+        </iframe>
+      </div>
+      <div class="map-info reveal">
+        <div class="info-row">
+          <div class="info-icon">🏢</div>
+          <div>
+            <div class="info-label">Company</div>
+            <div class="info-val">㈱末広ボデー</div>
+          </div>
+        </div>
+        <div class="info-row">
+          <div class="info-icon">📍</div>
+          <div>
+            <div class="info-label">Address</div>
+            <div class="info-val">〒071-8131<br>北海道旭川市末広1条9丁目1-29</div>
+          </div>
+        </div>
+        <div class="info-row">
+          <div class="info-icon">📞</div>
+          <div>
+            <div class="info-label">Phone</div>
+            <div class="info-val"><a href="tel:0166572114">0166-57-2114</a></div>
+          </div>
+        </div>
+        <div class="info-row">
+          <div class="info-icon">🕐</div>
+          <div>
+            <div class="info-label">Hours</div>
+            <div class="info-val">
+              月〜土：9:00 〜 17:30<br>
+              日曜・祝日：定休日
+            </div>
+          </div>
+        </div>
+        <div class="info-row">
+          <div class="info-icon">🅿️</div>
+          <div>
+            <div class="info-label">Parking</div>
+            <div class="info-val">お客様専用駐車場あり</div>
+          </div>
+        </div>
+        <div class="info-row">
+          <div class="info-icon">☕</div>
+          <div>
+            <div class="info-label">Amenity</div>
+            <div class="info-val">待合室・無料ドリンクサービスあり</div>
+          </div>
+        </div>
+        <a href="https://maps.google.com/?q=place_id:ChIJHW1ahhLkDF8RtgBrr6oSL8s" target="_blank" rel="noopener" class="btn-gold" style="margin-top:8px;justify-content:center;">Googleマップで開く →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="contact-section" id="contact">
+  <div class="contact-inner">
+    <p class="sec-eye reveal">Contact</p>
+    <h2 class="sec-title reveal">お問合せ・<em>お見積り</em></h2>
+    <div class="contact-grid">
+      <div class="reveal">
+        <div class="form-group">
+          <label>お名前 <span style="color:var(--red)">*</span></label>
+          <input type="text" placeholder="山田 太郎" />
+        </div>
+        <div class="form-group">
+          <label>電話番号</label>
+          <input type="tel" placeholder="0166-00-0000" />
+        </div>
+        <div class="form-group">
+          <label>メールアドレス</label>
+          <input type="email" placeholder="example@email.com" />
+        </div>
+        <div class="form-group">
+          <label>お問合せ種別</label>
+          <select>
+            <option value="">選択してください</option>
+            <option>板金修理のお見積り</option>
+            <option>塗装・全塗装のお見積り</option>
+            <option>車検・点検</option>
+            <option>事故修理・保険対応</option>
+            <option>タイヤ交換・下回り点検</option>
+            <option>その他のご相談</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>メッセージ（車種・状態など）</label>
+          <textarea placeholder="例：2018年式 トヨタ プリウス。フロントバンパーに傷があります。保険を使うか自費か迷っています。"></textarea>
+        </div>
+        <button type="button" class="btn-gold" style="width:100%;justify-content:center;font-size:16px;padding:18px;" onclick="handleSubmit()">
+          入力内容を確認する →
+        </button>
+        <p style="font-size:12px;color:var(--gray);line-height:1.7;margin-top:12px;">
+          提案デモのため、このフォームはまだ送信されません。公開時にメール送信・LINE連携・予約システム連携などを設定できます。
+        </p>
+      </div>
+      <div class="contact-aside reveal">
+        <div class="tel-block">
+          <div class="tel-block-label">Phone</div>
+          <div class="tel-number">0166-57-2114</div>
+          <div class="tel-hours">受付時間：9:00〜17:30（日曜・祝日定休）</div>
+        </div>
+        <div class="note-block">
+          <strong>お見積りは無料です。</strong><br><br>
+          お車の状態・年式・車種をお知らせいただくとスムーズにご案内できます。写真をお送りいただくことも可能です。<br><br>
+          保険修理の場合は、保険会社名と事故状況もあわせてお知らせください。
+        </div>
+        <div class="note-block" style="border-top:2px solid var(--gold);">
+          <strong style="color:var(--gold);">☕ 来店時のご案内</strong><br><br>
+          待合室に無料ドリンクをご用意しています。作業中もゆっくりおくつろぎください。スタッフが親切にご対応いたします。
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div>
+        <div class="footer-logo-en">SUEHIRO BODY</div>
+        <div class="footer-logo-ja">㈱末広ボデー</div>
+        <p class="footer-tagline">旭川市末広の板金・塗装・車検専門店。<br>どんな相談にも丁寧に応えます。</p>
+      </div>
+      <div class="footer-col">
+        <h4>Services</h4>
+        <ul>
+          <li><a href="bankin-toso.html">板金塗装</a></li>
+          <li><a href="shaken.html">末広ボデーの車検</a></li>
+          <li><a href="tire-car-goods.html">タイヤ・カー用品</a></li>
+          <li><a href="sales-rental.html">販売・レンタカー</a></li>
+          <li><a href="insurance-roadservice.html">保険・ロードサービス</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Info</h4>
+        <ul>
+          <li><a href="#news">お知らせ</a></li>
+          <li><a href="#reviews">お客様の声</a></li>
+          <li><a href="#access">アクセス</a></li>
+          <li><a href="contact.html">お問い合わせ</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 ㈱末広ボデー. All rights reserved.</span>
+      <span>〒071-8131 北海道旭川市末広1条9丁目1-29 ／ TEL: 0166-57-2114</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  /* SLIDESHOW */
+  const slides = document.querySelectorAll('.slide');
+  const dots   = document.querySelectorAll('.dot');
+  let current  = 0, timer;
+  function goSlide(n) {
+    slides[current].classList.remove('active');
+    dots[current].classList.remove('active');
+    current = (n + slides.length) % slides.length;
+    slides[current].classList.add('active');
+    dots[current].classList.add('active');
+    clearInterval(timer);
+    timer = setInterval(() => goSlide(current + 1), 5000);
+  }
+  timer = setInterval(() => goSlide(current + 1), 5000);
+
+  /* NEWS ACCORDION */
+  function toggleNews(el) {
+    const isOpen = el.classList.contains('open');
+    document.querySelectorAll('.news-item.open').forEach(i => i.classList.remove('open'));
+    if (!isOpen) el.classList.add('open');
+  }
+
+  /* FORM */
+  function handleSubmit() {
+    const name = document.querySelector('input[placeholder="山田 太郎"]').value;
+    if (!name.trim()) { alert('お名前をご入力ください。'); return; }
+    alert('入力内容を確認しました。\n\nこの提案デモでは、フォーム送信機能は未設定です。\n公開時にメール送信・LINE連携・予約システム連携などを設定できます。\n\nお急ぎの場合の導線：0166-57-2114');
+  }
+
+  /* NAV */
+  window.addEventListener('scroll', () => {
+    document.getElementById('main-nav').classList.toggle('scrolled', window.scrollY > 40);
+  });
+  function toggleMenu() { document.getElementById('mobileMenu').classList.toggle('open'); }
+  function closeMobile() { document.getElementById('mobileMenu').classList.remove('open'); }
+  document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener('click', e => {
+      const t = document.querySelector(a.getAttribute('href'));
+      if (t) { e.preventDefault(); t.scrollIntoView({ behavior: 'smooth', block: 'start' }); }
+    });
+  });
+
+  /* REVEAL */
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(el => { if (el.isIntersecting) el.target.classList.add('visible'); });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+</script>
+</body>
+</html>
+
+
